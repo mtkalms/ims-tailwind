@@ -1,8 +1,17 @@
 import type { NextConfig } from "next";
 
+const isGitHubPages = process.env.GITHUB_PAGES === 'true';
+
+console.log('GitHub Pages Build:', isGitHubPages);
+
 const nextConfig: NextConfig = {
-  /* config options here */
+  output: 'export',
   reactStrictMode: true,
+  assetPrefix: isGitHubPages ? '/ims-tailwind/' : undefined,
+  basePath: isGitHubPages ? '/ims-tailwind' : '',
+  images: {
+    unoptimized: true,
+  },
 };
 
 export default nextConfig;
