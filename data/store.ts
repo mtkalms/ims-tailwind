@@ -1,17 +1,17 @@
 import { RelationshipDefinitions } from "@/contexts/StoreContext"
 import { Tables, TablesSchema, Values, ValuesSchema } from "tinybase/store"
 
-const DEFAULT_USERS = {
+export const DEFAULT_USERS = {
     1: {name: "John Doe", email: "john.doe@example.ca"},
     2: {name: "Jane Doe", email: "jane.doe@example.ca"},
 }
 
-const DEFAULT_PROJECTS = {
+export const DEFAULT_PROJECTS = {
     "projecta": {name: "Project A", description: "Description of project A"},
     "projectb": {name: "Project B", description: "Description of project B"},
 }
 
-const DEFAULT_INCIDENTS = {
+export const DEFAULT_INCIDENTS = {
     1: {title: "Forgot keys at home", description: "I forgot my keys at home" ,status: "open", project: "projecta"},
     2: {title: "Lost wallet", description: "I lost my wallet" ,status: "closed", project: "projectb"},
     3: {title: "Car accident", description: "I had a car accident" ,status: "open", project: "projecta"},

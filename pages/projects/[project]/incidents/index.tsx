@@ -1,6 +1,13 @@
 import { StoreContext } from "@/contexts/StoreContext";
 import { useRouter } from "next/router";
 import { useContext } from "react";
+import { getProjectPaths } from "..";
+
+export const getStaticPaths = async () => ({
+  paths: getProjectPaths(),
+  fallback: false,
+});
+export const getStaticProps = async () => ({ props: {} });
 
 function IncidentsPage() {
   const storeContext = useContext(StoreContext);
