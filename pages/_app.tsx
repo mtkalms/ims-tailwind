@@ -1,3 +1,4 @@
+import Layout from "@/components/Layout";
 import { StoreProvider } from "@/contexts/StoreContext";
 import {
   DEFAULT_TABLES,
@@ -20,7 +21,9 @@ export default function App({ Component, pageProps }: AppProps) {
       defaultTables={DEFAULT_TABLES}
       defaultValues={DEFAULT_VALUES}
     >
-      <Component {...pageProps} />
+        <Layout>
+        <Component {...pageProps} />
+        </Layout>
     </StoreProvider>
     </ThemeProvider>
   );

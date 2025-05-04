@@ -4,9 +4,9 @@
 
 :root {
   --background: var(--color-white);
-  --foreground: var(--color-slate-900);
+  --foreground: var(--color-slate-800);
   @variant dark {
-      --background: var(--color-slate-950);
+      --background: var(--color-slate-900);
       --foreground: var(--color-white);
   }
 }
@@ -17,6 +17,40 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
+
+@layer components {
+  .button {
+    @apply rounded-lg p-1.5;
+    @apply text-sm;
+    @apply hover:bg-slate-100 dark:hover:bg-slate-800; 
+    @apply text-slate-600 hover:text-slate-500;
+    @apply border border-slate-600 hover:border-slate-500;
+    .icon-outline {
+      @apply stroke-slate-600 hover:stroke-slate-500;
+    }
+    .icon-solid {
+      @apply fill-slate-600 hover:fill-slate-500;
+    }
+    svg {
+      @apply w-4 h-4;
+    } 
+  }
+  .menu-item {
+    @apply rounded-lg p-1;
+    @apply hover:bg-slate-100 dark:hover:bg-slate-800;
+    @apply text-slate-600 hover:text-slate-800 dark:text-slate-300 dark:hover:text-slate-100;
+    .icon-outline {
+      @apply stroke-slate-600 hover:stroke-slate-800 dark:stroke-slate-300 dark:hover:stroke-slate-100;
+    }
+    .icon-solid {
+      @apply fill-slate-600 hover:fill-slate-800 dark:fill-slate-300 dark:hover:fill-slate-100;
+    }
+    svg {
+      @apply w-4 h-4;
+    } 
+  }
+}
+
 
 body {
   background: var(--background);
