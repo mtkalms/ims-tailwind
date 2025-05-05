@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import Sidebar from "./Sidebar/Sidebar";
 import Navbar from "./Navbar";
 import { IconBolt, IconHome, IconTable } from "@tabler/icons-react";
 import { useRouter } from "next/router";
 import { getIncidentPaths } from "@/static/paths";
+import { StoreContext } from "@/contexts/StoreContext";
 
 export const getStaticPaths = async () => ({
   paths: getIncidentPaths(),
@@ -11,28 +12,31 @@ export const getStaticPaths = async () => ({
 });
 export const getStaticProps = async () => ({ props: {} });
 
-interface ProjectNavMenuProps {
-  project: string;
+interface ProjectMenuProps {
+  projectId?: string;
+  projectCount?: number;
+  incidentCount?: number;
 }
 
-function ProjectNavMenu({ project }: ProjectNavMenuProps) {
+function ProjectNavMenu({ projectId, incidentCount }: ProjectMenuProps) {
   return (
     <Navbar.Menu>
       <Navbar.MenuItem
         label="Project"
-        href={`/${project}`}
-        icon={<IconTable className="icon-outline" />}
+        href={`/${projectId}`}
+        icon={<IconTable className="icon-outline"/>}
       />
       <Navbar.MenuItem
         label="Incidents" root
-        href={`/${project}/incidents`}
-        icon={<IconBolt className="icon-outline" />}
+        href={`/${projectId}/incidents`}
+        icon={<IconBolt className="icon-outline"/>}
+        count={incidentCount}
       />
     </Navbar.Menu>
   );
 }
 
-function NavMenu() {
+function NavMenu({ projectCount }: ProjectMenuProps) {
   return (
     <Navbar.Menu>
       <Navbar.MenuItem
@@ -44,22 +48,23 @@ function NavMenu() {
         label="Projects"
         href="/projects"
         icon={<IconTable className="icon-outline" />}
+        count={projectCount}
       />
     </Navbar.Menu>
   );
 }
 
-function ProjectSidebarMenu({ project }: ProjectNavMenuProps) {
+function ProjectSidebarMenu({ projectId }: ProjectMenuProps) {
   return (
     <Sidebar.Menu>
       <Sidebar.MenuItem
         label="Project"
-        href={`/${project}`}
+        href={`/${projectId}`}
         icon={<IconTable className="icon-outline" />}
       />
       <Sidebar.MenuItem
         label="Incidents"
-        href={`/${project}/incidents`}
+        href={`/${projectId}/incidents`}
         icon={<IconBolt className="icon-outline" />}
       />
     </Sidebar.Menu>
@@ -85,17 +90,19 @@ function SidebarMenu() {
 
 function Layout({ children }: { children: React.ReactNode }) {
   const [showSidebar, setShowSidebar] = React.useState(false);
-
+  const storeContext = useContext(StoreContext);
   const router = useRouter();
-  const project = router.query.project as string;
+  const projectId = router.query.project as string;
+  const projectCount = storeContext?.store.getRowCount("projects") || 0;
+  const incidentCount = storeContext?.relationships?.getLocalRowIds("projectIncidents", projectId).length || 0;
 
   return (
     <div>
       <Navbar onToggleSidebar={() => setShowSidebar((value) => !value)}>
-        {project ? <ProjectNavMenu project={project} /> : <NavMenu />}
+        {projectId ? <ProjectNavMenu projectId={projectId} incidentCount={incidentCount}/> : <NavMenu projectCount={projectCount}/>}
       </Navbar>
       <Sidebar show={showSidebar} onClose={() => setShowSidebar(false)}>
-        {project ? <ProjectSidebarMenu project={project} /> : <SidebarMenu />}
+        {projectId ? <ProjectSidebarMenu projectId={projectId} /> : <SidebarMenu />}
       </Sidebar>
       <div className="mx-auto grid w-full max-w-7xl p-8">{children}</div>
     </div>
