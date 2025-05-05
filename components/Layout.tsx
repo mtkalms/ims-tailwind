@@ -24,7 +24,7 @@ function ProjectNavMenu({ project }: ProjectNavMenuProps) {
         icon={<IconTable className="icon-outline" />}
       />
       <Navbar.MenuItem
-        label="Incidents"
+        label="Incidents" root
         href={`/${project}/incidents`}
         icon={<IconBolt className="icon-outline" />}
       />
@@ -40,7 +40,7 @@ function NavMenu() {
         href="/"
         icon={<IconHome className="icon-outline" />}
       />
-      <Navbar.MenuItem
+      <Navbar.MenuItem root
         label="Projects"
         href="/projects"
         icon={<IconTable className="icon-outline" />}

@@ -1,5 +1,7 @@
 import { StoreContext } from "@/contexts/StoreContext";
 import { getProjectPaths } from "@/static/paths";
+import { IconBoltFilled } from "@tabler/icons-react";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useContext } from "react";
 
@@ -21,29 +23,30 @@ function IncidentsPage() {
     }));
 
   return (
-    <div>
-      <h1>Incidents</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          {incidents?.map((row) => (
-            <tr key={row.id}>
-              <th>{row.id}</th>
-              <td>{row.incident.title}</td>
-              <td>{row.incident.description}</td>
-              <td>{row.incident.status}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+    <ul className="relative overflow-x-auto shadow-md rounded-lg text-sm border border-slate-600 flex flex-col">
+      {incidents?.map((row) => (
+        <li className=" p-3 [&:not(:last-child)]:border-b border-slate-600 hover:bg-slate-800" key={row.id}>
+          <Link href={`/${projectId}/incidents/${row.id}`}>
+            <div className="flex gap-2">
+              <IconBoltFilled
+                className={`w-5 ${
+                  row.incident.status === "closed"
+                    ? "fill-emerald-500"
+                    : "fill-red-500"
+                }`}
+              />
+              <div className="flex flex-col">
+                <span className="font-bold">{row.incident.title}</span>
+                <div className="flex items-center gap-2 text-slate-400 text-xs">
+                  <span>#{row.id}</span>
+                  <span>{row.incident.description}</span>
+                </div>
+              </div>
+            </div>
+          </Link>
+        </li>
+      ))}
+    </ul>
   );
 }
 

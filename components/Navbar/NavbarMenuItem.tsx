@@ -7,11 +7,12 @@ interface NavbarMenuItemProps {
   label: string;
   href: Url;
   icon?: React.ReactNode;
+  root?: boolean;
 }
 
-function NavbarMenuItem({ label, href, icon }: NavbarMenuItemProps) {
+function NavbarMenuItem({ label, href, icon, root }: NavbarMenuItemProps) {
   const router = useRouter();
-  const active = router.asPath === href;
+  const active = root ? router.asPath.startsWith(href.toString()) : router.asPath === href;
 
   return (
     <li className="navbar-menu-item list-none inline-block">
