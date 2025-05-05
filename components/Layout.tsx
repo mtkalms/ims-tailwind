@@ -104,6 +104,7 @@ function Layout({ children }: { children: React.ReactNode }) {
       <Sidebar show={showSidebar} onClose={() => setShowSidebar(false)}>
         {projectId ? <ProjectSidebarMenu projectId={projectId} /> : <SidebarMenu />}
       </Sidebar>
+      {showSidebar && <div className="fixed inset-0 z-10 bg-slate-950/10 md:max-2xl:backdrop-blur-[2px]" onClick={() => setShowSidebar(false)}></div>}
       <div className="mx-auto grid w-full max-w-7xl p-8">{children}</div>
     </div>
   );
