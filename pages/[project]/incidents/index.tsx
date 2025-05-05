@@ -25,7 +25,7 @@ function IncidentsPage() {
   return (
     <ul className="relative overflow-x-auto rounded-lg text-sm border border-slate-600 flex flex-col">
       {incidents?.map((row) => (
-        <li className=" p-3 [&:not(:last-child)]:border-b border-slate-600 hover:bg-slate-800" key={row.id}>
+        <li className=" p-3 [&:not(:last-child)]:border-b border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800" key={row.id}>
           <Link href={`/${projectId}/incidents/${row.id}`}>
             <div className="flex gap-2">
               <IconBoltFilled
