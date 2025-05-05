@@ -32,7 +32,7 @@ function NavbarMenuItem({
           {icon}
           <span>{label}</span>
           {count && (
-            <span className="rounded-full bg-slate-800 w-5 h-5 text-xs py-0.5 px-1.5 font-bold">
+            <span className="rounded-full bg-slate-200 dark:bg-slate-700 w-5 h-5 text-xs py-0.5 px-1.5 font-bold">
               {count}
             </span>
           )}
