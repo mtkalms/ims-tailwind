@@ -32,11 +32,9 @@ function Navbar({ children, onToggleSidebar }: NavbarProps) {
           <button onClick={onToggleSidebar} className="navbar-toggle button">
             <IconMenu2 className="icon-outline" />
           </button>
-          <div className="rounded-full bg-purple-600 p-1">
-            <Link href="/">
-              <IconMeteor className="stroke-amber-400" />
-            </Link>
-          </div>
+          <Link href="/" className="rounded-full bg-purple-600 p-1">
+            <IconMeteor className="stroke-amber-400" />
+          </Link>
           {project && <Link href={`/${projectId}`} className="text-lg font-semibold">{project.name}</Link>}
         </div>
         <div className="flex items-center">
