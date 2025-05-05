@@ -14,7 +14,7 @@ function NavbarMenuItem({ label, href, icon }: NavbarMenuItemProps) {
 
   return (
     <li className="navbar-menu-item list-none inline-block">
-      <div className={active ? "border-b-2 border-b-purple-400 pb-1" : "pb-1"}>
+      <div className={active ? "border-b-2 border-b-purple-400 pb-1" : "pb-1.5"}>
         <Link href={href} className="menu-item flex items-center px-3 gap-1">
           {icon}
           <span>{label}</span>
