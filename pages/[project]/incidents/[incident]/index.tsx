@@ -13,9 +13,7 @@ export const getStaticProps = async () => ({ props: {} });
 function Page() {
   const storeContext = useContext(StoreContext);
   const router = useRouter();
-  const projectId = router.query.project as string;
   const incidentId = router.query.incident as string;
-  const project = storeContext?.store.getRow("projects", projectId);
   const incident = storeContext?.store.getRow("incidents", incidentId);
 
   return (
