@@ -17,7 +17,7 @@ function Page() {
   const incident = storeContext?.store.getRow("incidents", incidentId);
 
   return (
-    <div className="relative overflow-x-auto shadow-md flex flex-col gap-4">
+    <div className="relative overflow-x-auto flex flex-col gap-4">
       <div className="flex items-center gap-2 justify-between border-b border-slate-600 pb-4">
         <h1 className="flex gap-2 text-2xl">
           <span>

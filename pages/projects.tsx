@@ -7,7 +7,7 @@ import { IconTable } from "@tabler/icons-react";
 function ProjectsPage() {
   const storeContext = useContext(StoreContext);
   return (
-    <ul className="relative overflow-x-auto shadow-md rounded-lg text-sm border border-slate-600 flex flex-col">
+    <ul className="relative overflow-x-auto rounded-lg text-sm border border-slate-600 flex flex-col">
       {Object.entries(useTable("projects", storeContext?.store)).map(([id, project]) => (
         <li className=" p-3 [&:not(:last-child)]:border-b border-slate-600 hover:bg-slate-800" key={id}>
           <Link href={`/${id}`}>
