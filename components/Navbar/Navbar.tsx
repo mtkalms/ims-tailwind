@@ -3,6 +3,16 @@ import ThemeModeToggle from "../ThemeModeToggle";
 import NavbarMenu from "./NavbarMenu";
 import NavbarMenuItem from "./NavbarMenuItem";
 import Link from "next/link";
+import { getIncidentPaths } from "@/static/paths";
+import { useRouter } from "next/router";
+import { StoreContext } from "@/contexts/StoreContext";
+import React, { useContext } from "react";
+
+export const getStaticPaths = async () => ({
+  paths: getIncidentPaths(),
+  fallback: false,
+});
+export const getStaticProps = async () => ({ props: {} });
 
 interface NavbarProps {
   children?: React.ReactNode;
@@ -10,6 +20,11 @@ interface NavbarProps {
 }
 
 function Navbar({ children, onToggleSidebar }: NavbarProps) {
+  const storeContext = useContext(StoreContext);
+  const router = useRouter(); 
+  const projectId = router.query.project as string;
+  const project = storeContext?.store.getRow("projects", projectId);
+
   return (
     <div className="navbar border-b-1 border-slate-700 flex flex-col">
       <div className="flex items-center justify-between p-4 pb-0">
@@ -22,6 +37,7 @@ function Navbar({ children, onToggleSidebar }: NavbarProps) {
               <IconMeteor className="stroke-amber-400" />
             </Link>
           </div>
+          {project && <Link href={`/${projectId}`} className="text-lg font-semibold">{project.name}</Link>}
         </div>
         <div className="flex items-center">
           <ThemeModeToggle />
