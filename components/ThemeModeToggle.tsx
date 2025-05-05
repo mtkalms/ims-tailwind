@@ -1,30 +1,43 @@
-
 import { useTheme } from "next-themes";
 
-import { useState, useEffect, ButtonHTMLAttributes, DetailedHTMLProps } from 'react';
+import {
+  useState,
+  useEffect,
+  ButtonHTMLAttributes,
+  DetailedHTMLProps,
+} from "react";
 
-import { IconSun, IconMoon, IconSunMoon, IconProps } from "@tabler/icons-react"
+import { IconSun, IconMoon, IconSunMoon, IconProps } from "@tabler/icons-react";
 
 const MODES = ["dark", "light", "system"];
 type ThemeMode = (typeof MODES)[number];
 
-interface ThemeModeToggleProps extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
+type ButtonProps = DetailedHTMLProps<
+  ButtonHTMLAttributes<HTMLButtonElement>,
+  HTMLButtonElement
+>;
+
+interface ThemeModeIconProps extends IconProps {
+  mode: ThemeMode;
+}
+
+interface ThemeModeToggleProps extends ButtonProps {
   size?: number;
 }
 
-function ThemeModeIcon({ mode, ...props }: IconProps) {
+function ThemeModeIcon({ mode, ...props }: ThemeModeIconProps) {
   switch (mode) {
     case "dark":
-      return <IconMoon {...props}/>
+      return <IconMoon {...props} />;
     case "light":
-      return <IconSun {...props}/>
+      return <IconSun {...props} />;
     case "system":
     default:
-      return <IconSunMoon {...props}/>
+      return <IconSunMoon {...props} />;
   }
 }
 
-function ThemeModeToggle({size = 16, ...props}: ThemeModeToggleProps) {
+function ThemeModeToggle({ size = 16, ...props }: ThemeModeToggleProps) {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -34,20 +47,24 @@ function ThemeModeToggle({size = 16, ...props}: ThemeModeToggleProps) {
 
   useEffect(() => {
     setMounted(true);
-  }, [])
+  }, []);
 
   if (!mounted) {
-    return <button>
-      <IconSunMoon/>
-    </button>
+    return (
+      <button type="button" className="button">
+        <IconSunMoon width={size} height={size} className="icon-outline" />
+      </button>
+    );
   }
 
   return (
     <button type="button" className="button" onClick={toggle} {...props}>
-      <ThemeModeIcon mode={theme as ThemeMode}
+      <ThemeModeIcon
+        mode={theme as ThemeMode}
         className="icon-outline"
         title={`Toggle theme (${theme})`}
-        width={size} height={size}  
+        width={size}
+        height={size}
         suppressHydrationWarning
       />
     </button>
