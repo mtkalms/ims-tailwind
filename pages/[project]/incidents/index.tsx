@@ -1,7 +1,7 @@
 import { StoreContext } from "@/contexts/StoreContext";
+import { getProjectPaths } from "@/static/paths";
 import { useRouter } from "next/router";
 import { useContext } from "react";
-import { getProjectPaths } from "..";
 
 export const getStaticPaths = async () => ({
   paths: getProjectPaths(),

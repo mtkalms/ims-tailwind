@@ -1,16 +1,17 @@
+import { Url } from "next/dist/shared/lib/router/router";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 
 interface NavbarMenuItemProps {
   label: string;
-  href: string;
+  href: Url;
   icon?: React.ReactNode;
 }
 
 function NavbarMenuItem({ label, href, icon }: NavbarMenuItemProps) {
   const router = useRouter();
-  const active = router.pathname === href;
+  const active = router.asPath === href;
 
   return (
     <li className="navbar-menu-item list-none inline-block">
