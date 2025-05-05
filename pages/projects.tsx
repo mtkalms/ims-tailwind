@@ -1,5 +1,6 @@
 import { StoreContext } from "@/contexts/StoreContext";
 import { useContext } from "react";
+import Link from "next/link";
 import { useTable } from "tinybase/ui-react";
 
 function ProjectsPage() {
@@ -10,7 +11,6 @@ function ProjectsPage() {
       <table>
         <thead>
           <tr>
-            <th>ID</th>
             <th>Name</th>
             <th>Description</th>
           </tr>
@@ -19,8 +19,7 @@ function ProjectsPage() {
           {Object.entries(useTable("projects", storeContext?.store)).map(
             ([id, project]) => (
               <tr key={id}>
-                <th>{id}</th>
-                <td>{project.name}</td>
+                <td><Link href={`/${id}`}>{project.name}</Link></td>
                 <td>{project.description}</td>
               </tr>
             )
