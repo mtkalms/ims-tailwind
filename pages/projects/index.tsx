@@ -15,14 +15,14 @@ function ProjectsPage({ isStatic = false }: { isStatic: boolean }) {
     <div>
       <div className="flex items-center gap-2 justify-between pb-4">
         <div></div>
-        <Link 
-          type="button" 
-          className={`button pr-2 py-1.5 flex items-center gap-2 ${isStatic ? "" : "text-white font-semibold bg-green-600 hover:bg-green-500"}`}
-          title={isStatic ? "Not available in static build" : "Create new project"}
-          href={isStatic ? "#" : "/projects/new"}
-        >
-          {isStatic ? <IconLock/> : <IconPlus/>}
-          New Project
+        <Link href={isStatic ? "#" : "/projects/new"}>
+          <button 
+            type="button" 
+            className={`${isStatic ? "btn" : "btn-add"} flex items-center`}
+            title={isStatic ? "Not available in static build" : "Create new project"}>
+            {isStatic ? <IconLock/> : <IconPlus/>}
+            <span>New Project</span>
+          </button>
         </Link>
       </div>
       <ul className="relative overflow-x-auto rounded-lg text-sm border border-slate-600 flex flex-col">

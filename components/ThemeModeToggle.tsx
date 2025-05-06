@@ -58,7 +58,7 @@ function ThemeModeToggle({ size = 16, ...props }: ThemeModeToggleProps) {
   }
 
   return (
-    <button type="button" className="button" onClick={toggle} {...props}>
+    <button type="button" className="btn" onClick={toggle} {...props}>
       <ThemeModeIcon
         mode={theme as ThemeMode}
         className="icon-outline"

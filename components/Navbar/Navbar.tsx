@@ -29,7 +29,7 @@ function Navbar({ children, onToggleSidebar }: NavbarProps) {
     <div className="navbar border-b-1 border-slate-700 flex flex-col">
       <div className="flex items-center justify-between p-4 pb-0">
         <div className="flex items-center gap-4">
-          <button onClick={onToggleSidebar} className="navbar-toggle button">
+          <button onClick={onToggleSidebar} className="navbar-toggle btn">
             <IconMenu2 className="icon-outline" />
           </button>
           <Link href="/" className="rounded-full bg-purple-600 p-1">

@@ -99,16 +99,16 @@ function NewProjectPage() {
         <div className="flex items-center gap-2 justify-end">
           <button
             type="button"
-            className="button bg-slate-600 hover:bg-slate-500 text-white font-semibold px-3"
+            className="btn"
             onClick={() => router.push("/projects")}
           >
-            Cancel
+            <span>Cancel</span>
           </button>
           <button
             type="submit"
-            className="button bg-green-600 hover:bg-green-500 text-white font-semibold px-3"
+            className="btn-add"
           >
-            Create
+            <span>Create</span>
           </button>
         </div>
       </form>

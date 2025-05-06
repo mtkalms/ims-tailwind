@@ -21,7 +21,7 @@ function Sidebar({ children, show, onClose }: SidebarProps) {
         <Link href="/" className="rounded-full bg-purple-600 p-1">
           <IconMeteor className="stroke-amber-400" />
         </Link>
-        <button type="button" onClick={onClose} className="button absolute border-0 top-2.5 end-2.5 inline-flex items-center" >
+        <button type="button" onClick={onClose} className="btn absolute border-0 top-2.5 end-2.5 inline-flex items-center" >
           <IconX className="icon-outline" />
           <span className="sr-only">Close Menu</span>
         </button>

@@ -19,21 +19,25 @@
 }
 
 @layer components {
-  .button {
+  button {
     @apply rounded-lg p-1.5;
-    @apply text-sm;
-    @apply hover:bg-slate-100 dark:hover:bg-slate-800; 
-    @apply text-slate-600 hover:text-slate-500;
-    @apply border border-slate-600 hover:border-slate-500;
-    .icon-outline {
-      @apply stroke-slate-600 hover:stroke-slate-500;
-    }
-    .icon-solid {
-      @apply fill-slate-600 hover:fill-slate-500;
-    }
+    @apply text-xs font-bold;
     svg {
       @apply w-4 h-4;
     } 
+    span {
+      @apply px-2
+    }
+  }
+  .btn {
+    @apply hover:bg-slate-100 dark:hover:bg-slate-800; 
+    @apply text-slate-600 hover:text-slate-500;
+    @apply border border-slate-600 hover:border-slate-500;
+  }
+  .btn-add {
+    @apply text-slate-100 hover:text-white;
+    @apply bg-green-600 hover:bg-green-500;
+    @apply border border-green-600 ;
   }
   .input {
     @apply rounded-lg p-2;
