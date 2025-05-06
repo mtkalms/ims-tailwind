@@ -4,7 +4,7 @@ import {
   IconCircleCheckFilled,
 } from "@tabler/icons-react";
 import { useRouter } from "next/navigation";
-import { MouseEvent, useContext, useState } from "react";
+import {  useContext, useState } from "react";
 import { Table } from "tinybase";
 
 function NewProjectPage() {
