@@ -16,7 +16,7 @@ function NavbarMenuItem({
   href,
   icon,
   root,
-  count,
+  count = 0,
 }: NavbarMenuItemProps) {
   const router = useRouter();
   const active = root
@@ -31,11 +31,11 @@ function NavbarMenuItem({
         <Link href={href} className="menu-item flex items-center px-3 gap-2">
           {icon}
           <span>{label}</span>
-          {count && (
-            <span className="rounded-full bg-slate-200 dark:bg-slate-700 w-5 h-5 text-xs py-0.5 px-1.5 font-bold">
+          {(count > 0) &&
+            <span className="rounded-full bg-slate-200 dark:bg-slate-700 w-5 h-5 text-xs font-bold flex items-center justify-center">
               {count}
             </span>
-          )}
+          }
         </Link>
       </div>
     </li>
