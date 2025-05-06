@@ -17,7 +17,7 @@ function ProjectsPage({ isStatic = false }: { isStatic: boolean }) {
         <div></div>
         <Link 
           type="button" 
-          className={`button pr-2 py-1.5 flex items-center gap-2  text-white font-semibold ${isStatic ? "bg-slate-800" : "bg-green-600 hover:bg-green-500"}`}
+          className={`button pr-2 py-1.5 flex items-center gap-2 ${isStatic ? "" : "text-white font-semibold bg-green-600 hover:bg-green-500"}`}
           title={isStatic ? "Not available in static build" : "Create new project"}
           href={isStatic ? "#" : "/projects/new"}
         >
