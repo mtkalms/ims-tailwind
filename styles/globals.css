@@ -35,6 +35,12 @@
       @apply w-4 h-4;
     } 
   }
+  .input {
+    @apply rounded-lg p-2;
+    @apply text-sm;
+    @apply bg-slate-100 dark:bg-slate-800;
+    @apply border border-slate-600 hover:border-slate-500;
+  }
   .menu-item {
     @apply rounded-lg p-1;
     @apply hover:bg-slate-100 dark:hover:bg-slate-800;

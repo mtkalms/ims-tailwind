@@ -1,15 +1,20 @@
 import { StoreContext } from "@/contexts/StoreContext";
-import { getProjectPaths } from "@/static/paths";
+import { getProjectPaths, isStaticBuild } from "@/static/paths";
 import { IconBoltFilled } from "@tabler/icons-react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useContext } from "react";
 
-export const getStaticPaths = async () => ({
-  paths: getProjectPaths(),
-  fallback: false,
-});
-export const getStaticProps = async () => ({ props: {} });
+export const getStaticPaths = isStaticBuild()
+  ? async () => ({
+      paths: getProjectPaths(),
+      fallback: false,
+    })
+  : undefined;
+export const getStaticProps = isStaticBuild()
+  ? async () => ({ props: {} })
+  : undefined;
+
 
 function IncidentsPage() {
   const storeContext = useContext(StoreContext);
