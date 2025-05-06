@@ -14,9 +14,10 @@ export const getStaticProps = async () => ({ props: {} });
 function IncidentsPage() {
   const storeContext = useContext(StoreContext);
   const router = useRouter();
-  const projectId = router.query.project as string;
+  const projectSlug = router.query.project as string;
+  const project = storeContext?.get("projects", { slug: projectSlug });
   const incidents = storeContext?.relationships
-    ?.getLocalRowIds("projectIncidents", projectId)
+    ?.getLocalRowIds("projectIncidents", project.id)
     .map((id) => ({
       id: id,
       incident: storeContext?.store.getRow("incidents", id),
@@ -26,7 +27,7 @@ function IncidentsPage() {
     <ul className="relative overflow-x-auto rounded-lg text-sm border border-slate-600 flex flex-col">
       {incidents?.map((row) => (
         <li className=" p-3 [&:not(:last-child)]:border-b border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800" key={row.id}>
-          <Link href={`/${projectId}/incidents/${row.id}`}>
+          <Link href={`/${project.slug}/incidents/${row.id}`}>
             <div className="flex gap-2">
               <IconBoltFilled
                 className={`w-5 ${

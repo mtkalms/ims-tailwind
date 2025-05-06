@@ -10,7 +10,7 @@ function ProjectsPage() {
     <ul className="relative overflow-x-auto rounded-lg text-sm border border-slate-600 flex flex-col">
       {Object.entries(useTable("projects", storeContext?.store)).map(([id, project]) => (
         <li className=" p-3 [&:not(:last-child)]:border-b border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800" key={id}>
-          <Link href={`/${id}`}>
+          <Link href={`/${project.slug}`}>
             <div className="flex gap-3">
               <IconTable className="stroke-slate-400 w-5"/>
               <div className="flex flex-col">

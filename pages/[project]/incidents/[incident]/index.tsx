@@ -14,7 +14,7 @@ function Page() {
   const storeContext = useContext(StoreContext);
   const router = useRouter();
   const incidentId = router.query.incident as string;
-  const incident = storeContext?.store.getRow("incidents", incidentId);
+  const incident = storeContext?.get("incidents", {id: incidentId});
 
   return (
     <div className="relative overflow-x-auto flex flex-col gap-4">

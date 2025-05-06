@@ -13,22 +13,22 @@ export const getStaticPaths = async () => ({
 export const getStaticProps = async () => ({ props: {} });
 
 interface ProjectMenuProps {
-  projectId?: string;
+  project?: string;
   projectCount?: number;
   incidentCount?: number;
 }
 
-function ProjectNavMenu({ projectId, incidentCount }: ProjectMenuProps) {
+function ProjectNavMenu({ project, incidentCount }: ProjectMenuProps) {
   return (
     <Navbar.Menu>
       <Navbar.MenuItem
         label="Project"
-        href={`/${projectId}`}
+        href={`/${project}`}
         icon={<IconTable className="icon-outline"/>}
       />
       <Navbar.MenuItem
         label="Incidents" root
-        href={`/${projectId}/incidents`}
+        href={`/${project}/incidents`}
         icon={<IconBolt className="icon-outline"/>}
         count={incidentCount}
       />
@@ -54,17 +54,17 @@ function NavMenu({ projectCount }: ProjectMenuProps) {
   );
 }
 
-function ProjectSidebarMenu({ projectId }: ProjectMenuProps) {
+function ProjectSidebarMenu({ project }: ProjectMenuProps) {
   return (
     <Sidebar.Menu>
       <Sidebar.MenuItem
         label="Project"
-        href={`/${projectId}`}
+        href={`/${project}`}
         icon={<IconTable className="icon-outline" />}
       />
       <Sidebar.MenuItem
         label="Incidents"
-        href={`/${projectId}/incidents`}
+        href={`/${project}/incidents`}
         icon={<IconBolt className="icon-outline" />}
       />
     </Sidebar.Menu>
@@ -92,17 +92,18 @@ function Layout({ children }: { children: React.ReactNode }) {
   const [showSidebar, setShowSidebar] = React.useState(false);
   const storeContext = useContext(StoreContext);
   const router = useRouter();
-  const projectId = router.query.project as string;
+  const projectSlug = router.query.project as string;
+  const project = storeContext?.get("projects", { slug: projectSlug });
   const projectCount = storeContext?.store.getRowCount("projects") || 0;
-  const incidentCount = storeContext?.relationships?.getLocalRowIds("projectIncidents", projectId).length || 0;
+  const incidentCount = storeContext?.relationships?.getLocalRowIds("projectIncidents", project.id).length || 0;
 
   return (
     <div>
       <Navbar onToggleSidebar={() => setShowSidebar((value) => !value)}>
-        {projectId ? <ProjectNavMenu projectId={projectId} incidentCount={incidentCount}/> : <NavMenu projectCount={projectCount}/>}
+        {projectSlug ? <ProjectNavMenu project={projectSlug} incidentCount={incidentCount}/> : <NavMenu projectCount={projectCount}/>}
       </Navbar>
       <Sidebar show={showSidebar} onClose={() => setShowSidebar(false)}>
-        {projectId ? <ProjectSidebarMenu projectId={projectId} /> : <SidebarMenu />}
+        {projectSlug ? <ProjectSidebarMenu project={projectSlug} /> : <SidebarMenu />}
       </Sidebar>
       {showSidebar && <div className="fixed inset-0 z-10 bg-slate-950/10 md:max-2xl:backdrop-blur-[2px]" onClick={() => setShowSidebar(false)}></div>}
       <div className="mx-auto grid w-full max-w-7xl p-8">{children}</div>
