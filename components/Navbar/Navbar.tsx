@@ -21,12 +21,12 @@ interface NavbarProps {
 
 function Navbar({ children, onToggleSidebar }: NavbarProps) {
   const storeContext = useContext(StoreContext);
-  const router = useRouter(); 
+  const router = useRouter();
   const projectId = router.query.project as string;
   const project = storeContext?.store.getRow("projects", projectId);
 
   return (
-    <div className="navbar border-b-1 border-slate-700 flex flex-col">
+    <div className="navbar flex flex-col border-b-1 border-slate-700">
       <div className="flex items-center justify-between p-4 pb-0">
         <div className="flex items-center gap-4">
           <button onClick={onToggleSidebar} className="navbar-toggle btn">
@@ -35,7 +35,11 @@ function Navbar({ children, onToggleSidebar }: NavbarProps) {
           <Link href="/" className="rounded-full bg-purple-600 p-1">
             <IconMeteor className="stroke-amber-400" />
           </Link>
-          {project && <Link href={`/${projectId}`} className="text-lg font-semibold">{project.name}</Link>}
+          {project && (
+            <Link href={`/${projectId}`} className="text-lg font-semibold">
+              {project.name}
+            </Link>
+          )}
         </div>
         <div className="flex items-center">
           <ThemeModeToggle />

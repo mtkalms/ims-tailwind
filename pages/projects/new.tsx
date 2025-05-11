@@ -4,7 +4,7 @@ import {
   IconCircleCheckFilled,
 } from "@tabler/icons-react";
 import { useRouter } from "next/navigation";
-import {  useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { Table } from "tinybase";
 
 function NewProjectPage() {
@@ -62,19 +62,19 @@ function NewProjectPage() {
             }
           />
           {error && !name && (
-            <span className="text-red-500 px-2 flex items-center gap-2 text-xs font-bold">
+            <span className="flex items-center gap-2 px-2 text-xs font-bold text-red-500">
               <IconAlertTriangleFilled className="w-3.5" />
               <span>New project name must not be blank</span>
             </span>
           )}
           {!nameValid && (
-            <span className="text-red-500 px-2 flex items-center gap-2 text-xs font-bold">
+            <span className="flex items-center gap-2 px-2 text-xs font-bold text-red-500">
               <IconAlertTriangleFilled className="w-3.5" />
               <span>Project identifier {slug(name)} already in use</span>
             </span>
           )}
           {name && nameValid && (
-            <span className="text-green-500 px-2 flex items-center gap-2 text-xs font-bold">
+            <span className="flex items-center gap-2 px-2 text-xs font-bold text-green-500">
               <IconCircleCheckFilled className="w-3.5" />
               <span>
                 Your new porject will be created with the identifier{" "}
@@ -96,7 +96,7 @@ function NewProjectPage() {
             onChange={(event) => setDescription(event.target.value)}
           />
         </div>
-        <div className="flex items-center gap-2 justify-end">
+        <div className="flex items-center justify-end gap-2">
           <button
             type="button"
             className="btn"
@@ -104,10 +104,7 @@ function NewProjectPage() {
           >
             <span>Cancel</span>
           </button>
-          <button
-            type="submit"
-            className="btn-add"
-          >
+          <button type="submit" className="btn-add">
             <span>Create</span>
           </button>
         </div>

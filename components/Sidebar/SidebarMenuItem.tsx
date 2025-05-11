@@ -10,12 +10,9 @@ interface SidebarMenuItemProps {
 function SidebarMenuItem({ label, href, icon }: SidebarMenuItemProps) {
   return (
     <li className="sidebar-menu-item">
-      <Link
-        href={href}
-        className="flex items-center menu-item"
-      >
+      <Link href={href} className="menu-item flex items-center">
         {icon}
-        <span className="flex-1 ms-3 whitespace-nowrap">{label}</span>
+        <span className="ms-3 flex-1 whitespace-nowrap">{label}</span>
       </Link>
     </li>
   );

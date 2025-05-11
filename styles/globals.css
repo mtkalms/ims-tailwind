@@ -6,8 +6,8 @@
   --background: var(--color-white);
   --foreground: var(--color-slate-800);
   @variant dark {
-      --background: var(--color-slate-900);
-      --foreground: var(--color-white);
+    --background: var(--color-slate-900);
+    --foreground: var(--color-white);
   }
 }
 
@@ -23,21 +23,21 @@
     @apply rounded-lg p-1.5;
     @apply text-xs font-bold;
     svg {
-      @apply w-4 h-4;
-    } 
+      @apply h-4 w-4;
+    }
     span {
-      @apply px-2
+      @apply px-2;
     }
   }
   .btn {
-    @apply hover:bg-slate-100 dark:hover:bg-slate-800; 
+    @apply hover:bg-slate-100 dark:hover:bg-slate-800;
     @apply text-slate-600 hover:text-slate-500;
     @apply border border-slate-600 hover:border-slate-500;
   }
   .btn-add {
     @apply text-slate-100 hover:text-white;
     @apply bg-green-600 hover:bg-green-500;
-    @apply border border-green-600 ;
+    @apply border border-green-600;
   }
   .input {
     @apply rounded-lg p-2;
@@ -56,14 +56,13 @@
       @apply fill-slate-600 hover:fill-slate-800 dark:fill-slate-300 dark:hover:fill-slate-100;
     }
     svg {
-      @apply w-4 h-4;
-    } 
+      @apply h-4 w-4;
+    }
   }
 }
-
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: (--var)
+  font-family: (--var);
 }

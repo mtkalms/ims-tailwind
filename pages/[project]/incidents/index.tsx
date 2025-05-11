@@ -15,7 +15,6 @@ export const getStaticProps = isStaticBuild()
   ? async () => ({ props: {} })
   : undefined;
 
-
 function IncidentsPage() {
   const storeContext = useContext(StoreContext);
   const router = useRouter();
@@ -29,9 +28,12 @@ function IncidentsPage() {
     }));
 
   return (
-    <ul className="relative overflow-x-auto rounded-lg text-sm border border-slate-600 flex flex-col">
+    <ul className="relative flex flex-col overflow-x-auto rounded-lg border border-slate-600 text-sm">
       {incidents?.map((row) => (
-        <li className=" p-3 [&:not(:last-child)]:border-b border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800" key={row.id}>
+        <li
+          className="border-slate-600 p-3 hover:bg-slate-100 dark:hover:bg-slate-800 [&:not(:last-child)]:border-b"
+          key={row.id}
+        >
           <Link href={`/${project.slug}/incidents/${row.id}`}>
             <div className="flex gap-2">
               <IconBoltFilled
@@ -43,7 +45,7 @@ function IncidentsPage() {
               />
               <div className="flex flex-col">
                 <span className="font-bold">{row.incident.title}</span>
-                <div className="flex items-center gap-2 text-slate-400 text-xs">
+                <div className="flex items-center gap-2 text-xs text-slate-400">
                   <span>#{row.id}</span>
                   <span>{row.incident.description}</span>
                 </div>

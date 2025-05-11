@@ -24,12 +24,13 @@ function ProjectNavMenu({ project, incidentCount }: ProjectMenuProps) {
       <Navbar.MenuItem
         label="Project"
         href={`/${project}`}
-        icon={<IconTable className="icon-outline"/>}
+        icon={<IconTable className="icon-outline" />}
       />
       <Navbar.MenuItem
-        label="Incidents" root
+        label="Incidents"
+        root
         href={`/${project}/incidents`}
-        icon={<IconBolt className="icon-outline"/>}
+        icon={<IconBolt className="icon-outline" />}
         count={incidentCount}
       />
     </Navbar.Menu>
@@ -44,7 +45,8 @@ function NavMenu({ projectCount }: ProjectMenuProps) {
         href="/"
         icon={<IconHome className="icon-outline" />}
       />
-      <Navbar.MenuItem root
+      <Navbar.MenuItem
+        root
         label="Projects"
         href="/projects"
         icon={<IconTable className="icon-outline" />}
@@ -95,17 +97,32 @@ function Layout({ children }: { children: React.ReactNode }) {
   const projectSlug = router.query.project as string;
   const project = storeContext?.get("projects", { slug: projectSlug });
   const projectCount = storeContext?.store.getRowCount("projects") || 0;
-  const incidentCount = storeContext?.relationships?.getLocalRowIds("projectIncidents", project.id).length || 0;
+  const incidentCount =
+    storeContext?.relationships?.getLocalRowIds("projectIncidents", project.id)
+      .length || 0;
 
   return (
     <div>
       <Navbar onToggleSidebar={() => setShowSidebar((value) => !value)}>
-        {projectSlug ? <ProjectNavMenu project={projectSlug} incidentCount={incidentCount}/> : <NavMenu projectCount={projectCount}/>}
+        {projectSlug ? (
+          <ProjectNavMenu project={projectSlug} incidentCount={incidentCount} />
+        ) : (
+          <NavMenu projectCount={projectCount} />
+        )}
       </Navbar>
       <Sidebar show={showSidebar} onClose={() => setShowSidebar(false)}>
-        {projectSlug ? <ProjectSidebarMenu project={projectSlug} /> : <SidebarMenu />}
+        {projectSlug ? (
+          <ProjectSidebarMenu project={projectSlug} />
+        ) : (
+          <SidebarMenu />
+        )}
       </Sidebar>
-      {showSidebar && <div className="fixed inset-0 z-10 bg-slate-950/10 md:max-2xl:backdrop-blur-[2px]" onClick={() => setShowSidebar(false)}></div>}
+      {showSidebar && (
+        <div
+          className="fixed inset-0 z-10 bg-slate-950/10 md:max-2xl:backdrop-blur-[2px]"
+          onClick={() => setShowSidebar(false)}
+        ></div>
+      )}
       <div className="mx-auto grid w-full max-w-7xl p-8">{children}</div>
     </div>
   );

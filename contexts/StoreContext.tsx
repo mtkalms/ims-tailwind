@@ -50,7 +50,7 @@ function StoreProvider({
 }: StoreProviderProps) {
   const store = useRef<Store>(createStore());
   const storeRelationships = useRef<Relationships>(
-    createRelationships(store.current)
+    createRelationships(store.current),
   );
 
   useEffect(() => {
@@ -66,7 +66,7 @@ function StoreProvider({
       relationshipId,
       relationship.localRowId,
       relationship.remoteRowId,
-      relationship.linkedRowId
+      relationship.linkedRowId,
     );
   });
 
@@ -77,35 +77,41 @@ function StoreProvider({
     async (persister) => {
       await persister.startAutoLoad([defaultTables, defaultValues]);
       await persister.startAutoSave();
-    }
+    },
   );
 
   function getRow(table: string, params?: any) {
-    return Object.entries(store.current?.getTable(table))
-                 .find(([, row]) => 
-                    Object.entries(params).every(([key, value]) => row[key] === value
-                 )) || [undefined, undefined];
+    return (
+      Object.entries(store.current?.getTable(table)).find(([, row]) =>
+        Object.entries(params).every(([key, value]) => row[key] === value),
+      ) || [undefined, undefined]
+    );
   }
 
-  function get(table: string, params?: {id?: number}): any {
+  function get(table: string, params?: { id?: number }): any {
     if (params) {
-      if (params.id) 
-        return {...store.current?.getRow(table, params.id.toString()), id: params.id}
+      if (params.id)
+        return {
+          ...store.current?.getRow(table, params.id.toString()),
+          id: params.id,
+        };
       const [id, row] = getRow(table, params);
-      return {...row, id: id};
+      return { ...row, id: id };
     }
-    return Object.entries(store.current?.getTable(table)).map(([id, row]) => ({...row, id: id}));
+    return Object.entries(store.current?.getTable(table)).map(([id, row]) => ({
+      ...row,
+      id: id,
+    }));
   }
 
   function post(table: string, params?: any, action?: string): Id | undefined {
-    if (action)
-      return;
+    if (action) return;
     return store.current?.addRow(table, params);
   }
 
   function del(table: string, params: any): any {
-    const [id, ] = getRow(table, params);
-    return {...store.current?.getRow(table, id as string), id: id};
+    const [id] = getRow(table, params);
+    return { ...store.current?.getRow(table, id as string), id: id };
   }
 
   return (

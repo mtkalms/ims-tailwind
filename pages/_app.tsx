@@ -14,17 +14,17 @@ import type { AppProps } from "next/app";
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider attribute="class">
-    <StoreProvider
-      tableSchema={TABLES_SCHEMA}
-      valueSchema={VALUES_SCHEMA}
-      relationships={RELATIONSHIPS}
-      defaultTables={DEFAULT_TABLES}
-      defaultValues={DEFAULT_VALUES}
-    >
+      <StoreProvider
+        tableSchema={TABLES_SCHEMA}
+        valueSchema={VALUES_SCHEMA}
+        relationships={RELATIONSHIPS}
+        defaultTables={DEFAULT_TABLES}
+        defaultValues={DEFAULT_VALUES}
+      >
         <Layout>
-        <Component {...pageProps} />
+          <Component {...pageProps} />
         </Layout>
-    </StoreProvider>
+      </StoreProvider>
     </ThemeProvider>
   );
 }

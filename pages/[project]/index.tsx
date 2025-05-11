@@ -20,12 +20,12 @@ function Project() {
   const project = storeContext?.get("projects", { slug: projectSlug });
 
   return (
-    <div className="relative overflow-x-auto flex flex-col gap-4">
-      <div className="flex items-center gap-2 justify-between border-b border-slate-600 pb-4">
+    <div className="relative flex flex-col gap-4 overflow-x-auto">
+      <div className="flex items-center justify-between gap-2 border-b border-slate-600 pb-4">
         <h1 className="flex gap-2 text-2xl">{project?.name}</h1>
         <span className="font-bold">{project?.status}</span>
       </div>
-      <div className="text-sm ">
+      <div className="text-sm">
         <span className="font-bold">Description:</span> {project?.description}
       </div>
     </div>
