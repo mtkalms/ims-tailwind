@@ -48,6 +48,7 @@ function NewIncidentPage() {
           event.preventDefault();
           handleSubmit();
         }}
+        error={error}
       >
         <Form.Field label="Title" required>
           <input

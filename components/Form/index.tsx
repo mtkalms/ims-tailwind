@@ -1,12 +1,20 @@
 import clsx from "clsx";
 import FormField from "./FormField";
+import React from "react";
 
-interface FormProps extends React.HTMLAttributes<HTMLFormElement> {}
+interface FormProps extends React.HTMLAttributes<HTMLFormElement> {
+  error?: boolean;
+}
 
-function Form({ children, className, ...props }: FormProps) {
+interface FormContextProps {
+  error?: boolean;
+}
+const FormContext = React.createContext<FormContextProps>({ error: false });
+
+function Form({ children, error, className, ...props }: FormProps) {
   return (
     <form className={clsx("flex flex-col gap-4", className)} {...props}>
-      {children}
+      <FormContext.Provider value={{ error }}>{children}</FormContext.Provider>
     </form>
   );
 }

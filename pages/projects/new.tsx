@@ -37,11 +37,11 @@ function NewProjectPage() {
     <div className="flex flex-col gap-4">
       <h1 className="text-xl font-bold">Create a new Project</h1>
       <Form
-        className="flex flex-col gap-4"
         onSubmit={(event) => {
           event.preventDefault();
           handleSubmit();
         }}
+        error={error}
       >
         <Form.Field label="Project Name" required>
           <input
