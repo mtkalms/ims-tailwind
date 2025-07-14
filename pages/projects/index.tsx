@@ -14,8 +14,7 @@ function ProjectsPage({ isStatic = false }: { isStatic: boolean }) {
   const storeContext = useContext(StoreContext);
   return (
     <div>
-      <div className="flex items-center justify-between gap-2 pb-4">
-        <div></div>
+      <div className="flex items-center justify-end gap-2 pb-4">
         <Link href={isStatic ? "#" : "/projects/new"}>
           <button
             type="button"
