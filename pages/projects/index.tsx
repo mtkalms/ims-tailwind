@@ -29,25 +29,31 @@ function ProjectsPage({ isStatic = false }: { isStatic: boolean }) {
           </button>
         </Link>
       </div>
-      <List className="relative flex flex-col">
-        {Object.entries(useTable("projects", storeContext?.store)).map(
-          ([id, project]) => (
-            <List.Item key={id}>
-              <Link href={`/${project.slug}`}>
-                <div className="flex gap-3">
-                  <IconTable className="w-5 stroke-slate-400" />
-                  <div className="flex flex-col">
-                    <span className="font-bold">{project.name}</span>
-                    <div className="flex items-center gap-2 text-xs text-slate-400">
-                      <span>{project.description}</span>
+      {Object.entries(useTable("projects", storeContext?.store)).length ? (
+        <List className="relative flex flex-col">
+          {Object.entries(useTable("projects", storeContext?.store)).map(
+            ([id, project]) => (
+              <List.Item key={id}>
+                <Link href={`/${project.slug}`}>
+                  <div className="flex gap-3">
+                    <IconTable className="w-5 stroke-slate-400" />
+                    <div className="flex flex-col">
+                      <span className="font-bold">{project.name}</span>
+                      <div className="flex items-center gap-2 text-xs text-slate-400">
+                        <span>{project.description}</span>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </Link>
-            </List.Item>
-          ),
-        )}
-      </List>
+                </Link>
+              </List.Item>
+            ),
+          )}
+        </List>
+      ) : (
+        <div className="text-center text-slate-500">
+          No projects found. Create a new project to get started.
+        </div>
+      )}
     </div>
   );
 }

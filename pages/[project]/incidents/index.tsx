@@ -28,7 +28,7 @@ function IncidentsPage() {
       incident: storeContext?.store.getRow("incidents", id),
     }));
 
-  return (
+  return incidents?.length ? (
     <List striped className="relative flex flex-col">
       {incidents?.map((row) => (
         <List.Item key={row.id}>
@@ -53,6 +53,10 @@ function IncidentsPage() {
         </List.Item>
       ))}
     </List>
+  ) : (
+    <div className="text-center text-slate-500">
+      No incidents found for this project.
+    </div>
   );
 }
 
