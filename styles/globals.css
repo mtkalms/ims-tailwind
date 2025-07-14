@@ -16,6 +16,7 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --border-default: oklch(44.6% 0.043 257.281);
 }
 
 @layer components {
