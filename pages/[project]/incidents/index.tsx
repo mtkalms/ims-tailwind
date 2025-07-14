@@ -1,3 +1,4 @@
+import List from "@/components/List";
 import { StoreContext } from "@/contexts/StoreContext";
 import { getProjectPaths, isStaticBuild } from "@/static/paths";
 import { IconBoltFilled } from "@tabler/icons-react";
@@ -28,12 +29,9 @@ function IncidentsPage() {
     }));
 
   return (
-    <ul className="relative flex flex-col overflow-x-auto rounded-lg border border-slate-600 text-sm">
+    <List striped className="relative flex flex-col">
       {incidents?.map((row) => (
-        <li
-          className="border-slate-600 p-3 hover:bg-slate-100 dark:hover:bg-slate-800 [&:not(:last-child)]:border-b"
-          key={row.id}
-        >
+        <List.Item key={row.id}>
           <Link href={`/${project.slug}/incidents/${row.id}`}>
             <div className="flex gap-2">
               <IconBoltFilled
@@ -52,9 +50,9 @@ function IncidentsPage() {
               </div>
             </div>
           </Link>
-        </li>
+        </List.Item>
       ))}
-    </ul>
+    </List>
   );
 }
 
