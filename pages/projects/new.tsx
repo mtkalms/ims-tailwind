@@ -1,8 +1,5 @@
+import Form from "@/components/Form";
 import { StoreContext } from "@/contexts/StoreContext";
-import {
-  IconAlertTriangleFilled,
-  IconCircleCheckFilled,
-} from "@tabler/icons-react";
 import { useRouter } from "next/navigation";
 import { useContext, useState } from "react";
 import { Table } from "tinybase";
@@ -38,18 +35,15 @@ function NewProjectPage() {
 
   return (
     <div className="flex flex-col gap-4">
-      <h1 className="text-xl font-bold">Create a new project</h1>
-      <form
+      <h1 className="text-xl font-bold">Create a new Project</h1>
+      <Form
         className="flex flex-col gap-4"
         onSubmit={(event) => {
           event.preventDefault();
           handleSubmit();
         }}
       >
-        <div className="flex flex-col gap-2">
-          <label htmlFor="name" className="text-sm font-semibold">
-            Project Name
-          </label>
+        <Form.Field label="Project Name" required>
           <input
             required
             type="text"
@@ -62,31 +56,22 @@ function NewProjectPage() {
             }
           />
           {error && !name && (
-            <span className="flex items-center gap-2 px-2 text-xs font-bold text-red-500">
-              <IconAlertTriangleFilled className="w-3.5" />
-              <span>New project name must not be blank</span>
-            </span>
+            <Form.Field.Message type="error">
+              Project name is required
+            </Form.Field.Message>
           )}
           {!nameValid && (
-            <span className="flex items-center gap-2 px-2 text-xs font-bold text-red-500">
-              <IconAlertTriangleFilled className="w-3.5" />
-              <span>Project identifier {slug(name)} already in use</span>
-            </span>
+            <Form.Field.Message type="error">
+              Project identifier {slug(name)} already in use
+            </Form.Field.Message>
           )}
           {name && nameValid && (
-            <span className="flex items-center gap-2 px-2 text-xs font-bold text-green-500">
-              <IconCircleCheckFilled className="w-3.5" />
-              <span>
-                Your new porject will be created with the identifier{" "}
-                {slug(name)}
-              </span>
-            </span>
+            <Form.Field.Message type="success">
+              Your new porject will be created with the identifier {slug(name)}
+            </Form.Field.Message>
           )}
-        </div>
-        <div className="flex flex-col gap-2">
-          <label htmlFor="description" className="text-sm font-semibold">
-            Description
-          </label>
+        </Form.Field>
+        <Form.Field label="Description">
           <textarea
             rows={8}
             id="description"
@@ -95,7 +80,7 @@ function NewProjectPage() {
             value={description}
             onChange={(event) => setDescription(event.target.value)}
           />
-        </div>
+        </Form.Field>
         <div className="flex items-center justify-end gap-2">
           <button
             type="button"
@@ -108,7 +93,7 @@ function NewProjectPage() {
             <span>Create</span>
           </button>
         </div>
-      </form>
+      </Form>
     </div>
   );
 }
